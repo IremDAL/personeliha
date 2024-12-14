@@ -115,8 +115,12 @@ Uçak Üret dediğimiz zaman uçağı üretip bilgilerini sql'e kaydediyor ve pa
 ![Ekran görüntüsü 2024-12-14 210602](https://github.com/user-attachments/assets/a539173a-ae68-40b6-a361-38cc06632550)
 <hr>
 
+Başarılı olduğu zaman:
+
 ![Ekran görüntüsü 2024-12-14 205456](https://github.com/user-attachments/assets/3015621d-894b-4113-b8a2-a319f06fa83c)
 <hr><hr><hr>
+
+AKINCI uçağı için bir örnek: 
 
 ![Ekran görüntüsü 2024-12-14 210946](https://github.com/user-attachments/assets/ee51c460-e3d8-4511-abaf-3839b0e12c7b)
 ![Ekran görüntüsü 2024-12-14 211029](https://github.com/user-attachments/assets/71cad6a3-396a-4dea-9a60-87c5aa901cc6)
