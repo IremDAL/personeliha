@@ -52,20 +52,27 @@ Geri Dönüşüm'e tıkladığımız zaman veri siliniyor ve isDeleted=True oluy
 ![Ekran görüntüsü 2024-12-14 200711](https://github.com/user-attachments/assets/6f27a5fd-02b3-497c-a6c2-491d1e9c528a)
 <hr><hr><hr>
 
+Kuyruk Takımı: 
+
 ![Ekran görüntüsü 2024-12-14 200730](https://github.com/user-attachments/assets/d8691890-12be-40d7-bd4c-40ac8a9ee139)
 ![Ekran görüntüsü 2024-12-14 200736](https://github.com/user-attachments/assets/3e930faa-121a-4aa2-9f09-333538616969)
 ![Ekran görüntüsü 2024-12-14 200806](https://github.com/user-attachments/assets/09730a19-da25-4b83-8014-b12857d0dc83)
 <hr><hr><hr>
+
+Gövde Takımı:
 
 ![Ekran görüntüsü 2024-12-14 200820](https://github.com/user-attachments/assets/3ca037d6-c8b2-4235-9909-ad7ea4b3ab89)
 ![Ekran görüntüsü 2024-12-14 200825](https://github.com/user-attachments/assets/b3622f94-3cba-45d1-ba65-4282fcafede7)
 ![Ekran görüntüsü 2024-12-14 200845](https://github.com/user-attachments/assets/c79da436-7f68-4dc1-819c-7b7539373a8c)
 <hr><hr><hr>
 
+Aviyonik Takımı: 
 ![Ekran görüntüsü 2024-12-14 200859](https://github.com/user-attachments/assets/f1df2e0f-3a5f-4195-9327-0ed0a1468a16)
 ![Ekran görüntüsü 2024-12-14 200904](https://github.com/user-attachments/assets/b82371bb-25ef-401c-ab56-b0362adae7a3)
 ![Ekran görüntüsü 2024-12-14 231140](https://github.com/user-attachments/assets/7f844017-65af-4e86-954e-feb047573748)
 <hr><hr><hr>
+
+Montaj Takımı:
 
 ![Ekran görüntüsü 2024-12-14 200930](https://github.com/user-attachments/assets/a0f990c1-58f7-4570-9a67-e0c794eabd2e)
 
@@ -84,6 +91,8 @@ Parçaları Göster dediğimiz zaman TB2 ye ait uçak parçaları geliyor.
 
 Seçilen Parçalar dediğimiz zaman seçtiğimiz parçaları görüyoruz.
 <hr><hr><hr>
+
+Uçak Üret dediğimiz zaman parçalar eksik olduğu için hata alıyoruz.
 
 ![Ekran görüntüsü 2024-12-14 201015](https://github.com/user-attachments/assets/afdaf39c-c654-4800-8688-5404b7617553)
 ![Ekran görüntüsü 2024-12-14 201038](https://github.com/user-attachments/assets/48b02876-aaea-416f-9b36-fe9674e87112)
