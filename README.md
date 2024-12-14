@@ -101,6 +101,7 @@ Uçak Üret dediğimiz zaman parçalar eksik olduğu için hata alıyoruz.
 <hr><hr><hr>
 
 ![Ekran görüntüsü 2024-12-14 201158](https://github.com/user-attachments/assets/a6253803-c4c3-495b-acdd-4fc8a0d1a114)
+
 Burada her bir parçadan kaç adet olduğunu hesaplıyoruz.
 <hr>
 
@@ -108,6 +109,8 @@ Burada her bir parçadan kaç adet olduğunu hesaplıyoruz.
 
 Uçak Üret dediğimiz zaman uçağı üretip bilgilerini sql'e kaydediyor ve parçaları stoktan azaltıyor ve aynı zamanda parçaları bir daha kullanamayacağımız için isDeleted=True yapıyoruz.
 <hr>
+
+![Ekran görüntüsü 2024-12-14 211029](https://github.com/user-attachments/assets/b3bcaa49-8f59-41a6-8bb9-c3b7da957e7b)
 
 ![Ekran görüntüsü 2024-12-14 210602](https://github.com/user-attachments/assets/a539173a-ae68-40b6-a361-38cc06632550)
 <hr>
