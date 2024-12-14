@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uçak Üretim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1><strong>Uçak Seçimi:</strong> <span id="selectedAircraftTitle"></span></h1>
+
+        <div class="mt-3" id="aircraftProductionButton">
+            <button id="produceAircraft" class="btn btn-warning">Parçaları Göster</button>
+        </div>
+
+        <div class="mt-4">
+            <ul id="partsList" class="list-group"></ul>
+        </div>
+        <div class="mt-4">
+            <h3><strong>Seçilen Parçalar:</strong></h3>
+            <ul id="selectedPartsList" class="list-group"></ul>
+        </div>
+        <div class="mt-3" id="aircraftshowButton">
+            <button id="aircraftshow" class="btn btn-warning">Uçak Üret</button>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const selectedAircraft = sessionStorage.getItem("selectedAircraft");
+            if (selectedAircraft) {
+                $('#selectedAircraftTitle').text(selectedAircraft);  
+            } else {
+                $('#selectedAircraftTitle').text('Seçilen uçak yok');  
+            }
+
+            $('#produceAircraft').click(function () {
+                if (!selectedAircraft) {
+                    alert("Lütfen önce bir uçak seçiniz!");
+                    return;
+                }
+
+                $.ajax({
+                    url: '/fetch_aircraft_parts/', 
+                    type: 'GET',
+                    data: { aircraftType: selectedAircraft },
+                    success: function (response) {
+                        const partsList = $('#partsList');
+                        partsList.empty(); 
+
+                        if (response.parts && response.parts.length > 0) {
+                            response.parts.forEach(part => {
+                                partsList.append(`
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        ${part.parts}
+                                        <button class="btn btn-success btn-sm add-part">+</button>
+                                    </li>
+                                `);
+                            });
+                        } else {
+                            partsList.append('<li class="list-group-item">Parça bulunamadı.</li>');
+                        }
+                    },
+                    error: function (xhr) {
+                        console.error("Error fetching parts:", xhr.responseText);
+                        alert("Parçalar getirilemedi.");
+                    }
+                });
+            });
+
+            $(document).ready(function() {
+                $(document).on('click', '.add-part', function() {
+                    const selectedPart = $(this).parent().text().trim(); 
+                    const selectedPartsList = $('#selectedPartsList');
+                    const selectedPartsItems = selectedPartsList.find('li'); 
+                    
+                    let partExists = false;
+                    selectedPartsItems.each(function() {
+                        if ($(this).text().trim() === selectedPart) {
+                            partExists = true;
+                        }
+                    });
+            
+                    
+                    if (!partExists) {
+                        selectedPartsList.append(`
+                            <li class="list-group-item d-flex justify-content-between">
+                                ${selectedPart}
+                                <button class="btn btn-danger btn-sm remove-part">-</button>
+                            </li>
+                        `);
+                      
+                        $(this).parent().remove();
+            
+                        
+                        updatePartCount();
+                    }
+                });
+            
+                
+                $(document).on('click', '.remove-part', function() {
+                    const removedPart = $(this).parent().text().trim();
+                    const partsList = $('#partsList');
+            
+                   
+                    partsList.append(`
+                        <li class="list-group-item d-flex justify-content-between">
+                            ${removedPart}
+                            <button class="btn btn-success btn-sm add-part">+</button>
+                        </li>
+                    `);
+            
+                   
+                    $(this).parent().remove();
+            
+                   
+                    updatePartCount();
+                });
+            
+                
+                function updatePartCount() {
+                    $.ajax({
+                        url: '/update_part_count/', 
+                        type: 'POST',
+                        data: {
+                            csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(), 
+                        },
+                        success: function(response) {
+                            console.log("Part counts updated successfully.");
+                        },
+                        error: function(xhr) {
+                            console.error("Error updating part counts:", xhr.responseText);
+                        }
+                    });
+                }
+            });
+            $(document).ready(function() {
+
+                const aircraftPartsRequirements = {
+                    "AKINCI": {
+                        "kanat": 4,
+                        "gövde": 1,
+                        "aviyonik": 1,
+                        "kuyruk": 1
+                    },
+                    "TB2": {
+                        "kanat": 2,
+                        "gövde": 1,
+                        "aviyonik": 2,
+                        "kuyruk": 1
+                    },
+                    "KIZILELMA": {
+                        "kanat": 2,
+                        "gövde": 1,
+                        "aviyonik": 1,
+                        "kuyruk": 2
+                    },
+                    "TB3": {
+                        "kanat": 3,
+                        "gövde": 1,
+                        "aviyonik": 2,
+                        "kuyruk": 1
+                    }
+                };
+            
+                $('#aircraftshow').click(function() {
+                    const selectedParts = $('#selectedPartsList li');
+                    let wingCount = 0;
+                    let tailCount = 0;
+                    let bodyCount = 0;
+                    let avionicsCount = 0;
+                    let selectedPartsArray = [];
+                    const selectedAircraft = $('#selectedAircraftTitle').text().trim();
+            
+                 
+                    selectedParts.each(function() {
+                        const partName = $(this).text().trim().toLowerCase();
+                        selectedPartsArray.push(partName);
+            
+                        if (partName.indexOf("kanat") !== -1) wingCount++;
+                        if (partName.indexOf("kuyruk") !== -1) tailCount++;
+                        if (partName.indexOf("gövde") !== -1) bodyCount++;
+                        if (partName.indexOf("aviyonik") !== -1) avionicsCount++;
+                    });
+            
+                    
+                    const requiredParts = aircraftPartsRequirements[selectedAircraft];
+                    if (!requiredParts) {
+                        alert("Geçersiz uçak türü.");
+                        return;
+                    }
+            
+                    
+                    let missingParts = [];
+                    if (wingCount < requiredParts.kanat) missingParts.push(`Kanat (gereken: ${requiredParts.kanat}, mevcut: ${wingCount})`);
+                    if (tailCount < requiredParts.kuyruk) missingParts.push(`Kuyruk (gereken: ${requiredParts.kuyruk}, mevcut: ${tailCount})`);
+                    if (bodyCount < requiredParts.gövde) missingParts.push(`Gövde (gereken: ${requiredParts.gövde}, mevcut: ${bodyCount})`);
+                    if (avionicsCount < requiredParts.aviyonik) missingParts.push(`Aviyonik (gereken: ${requiredParts.aviyonik}, mevcut: ${avionicsCount})`);
+            
+                    
+                    if (missingParts.length > 0) {
+                        alert(`${selectedAircraft} için eksik parçalar: \n- ${missingParts.join("\n- ")}`);
+                        return;
+                    }
+            
+                   
+                    sessionStorage.setItem("producedAircraft", selectedAircraft);
+                    sessionStorage.setItem("producedParts", JSON.stringify(selectedPartsArray));
+                    
+                    
+                    window.location.href = '/aircraft_produced';
+                });
+            });
+            
+    });
+    
+    </script>
+</body>
+</html>

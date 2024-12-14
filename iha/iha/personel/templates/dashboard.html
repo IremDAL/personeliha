@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takım ve Parçalar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">    
+        <h1><strong>Kullanıcı Adı:</strong> {{ username }}</h1>
+        <h1><strong>Team:</strong> {{ team }}</h1> 
+
+        <hr>
+        <hr>
+     
+        <hr>
+        <h2 class="text-center" id="islemler">İşlemler</h2>
+        <div class="mt-3" id="operationsButtons">
+            <button id="addPart" class="btn btn-success">Yeni Parça Ekle</button>
+            <button id="listParts" class="btn btn-primary">Parçaları Listele</button>
+        </div>
+        <div id="aircraftSelection" style="display:none;">
+            <h2 class="text-center">Uçak Seçimi</h2>
+            <select id="aircraftSelect" class="form-select">
+                <option value="" disabled selected>Uçak Seçiniz</option>
+                <option value="TB2">TB2</option>
+                <option value="TB3">TB3</option>
+                <option value="AKINCI">AKINCI</option>
+                <option value="KIZILELMA">KIZILELMA</option>
+            </select>
+        </div>
+            </div>
+            <div class="mt-5" id="aircraftProductionButton" style="display:none;">
+                <button id="produceAircraft" class="btn btn-warning">Uçak Üret</button>
+            </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        
+        const team = "{{ team }}"; 
+        sessionStorage.setItem('selectedTeam', team);
+        
+        $(document).ready(function() {
+            $('#addPart').click(function() {
+                window.location.href = '/add_part'; 
+            });
+        });
+        $(document).ready(function() {
+            $('#listParts').click(function() {
+                window.location.href = '/parts_list';
+            });
+        });
+         if (team === "Montaj Takımı") {
+            $('#aircraftSelection').show(); 
+            $('#operationsButtons').hide();
+            $('#islemler').hide(); 
+            $('#aircraftProductionButton').show();  
+        }
+        else {
+            $('#aircraftSelection').hide(); 
+            $('#aircraftProductionButton').hide(); 
+        }
+        $('#produceAircraft').click(function() {
+            window.location.href = '/aircraft_produce'; 
+        });
+        $("#aircraftSelect").change(function() {
+            const selectedAircraft = $(this).val(); 
+            sessionStorage.setItem("selectedAircraft", selectedAircraft); 
+        });
+        const teamParts = {
+                    "Kanat Takımı": ["Kanat"],
+                    "Gövde Takımı": ["Gövde"],
+                    "Kuyruk Takımı": ["Kuyruk"],
+                    "Aviyonik Takımı": ["Aviyonik"],
+                    "Montaj Takımı": ["Kanat", "Gövde", "Kuyruk", "Aviyonik"]
+                };
+        
+    </script>
+</body>
+</html>

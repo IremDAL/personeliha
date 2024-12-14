@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parçalar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Parçaları Listele</h1>
+    
+        <button id="listParts" class="btn btn-primary mt-3">Parçaları Listele</button>
+    
+        <h2 class="mt-4">Sonuçlar:</h2>
+        <ul id="partsList" class="list-group"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectedTeam = sessionStorage.getItem('selectedTeam');            
+            document.getElementById('listParts').addEventListener('click', function() {
+                if (!selectedTeam) {
+                    alert('Takım bilgisi eksik!');
+                    return;
+                }
+    
+                fetch(`/get_parts/`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const partsList = document.getElementById('partsList');
+                    partsList.innerHTML = '';     
+                    if (data.data) {
+                        data.data.forEach(part => {
+                            const li = document.createElement('li');
+                            li.classList.add('list-group-item');
+                            li.textContent = `ID: ${part.Id}, Aircraft: ${part.aircraft}, Parts: ${part.parts}`;
+
+                            const deleteButton = document.createElement('button');
+                            deleteButton.textContent = 'Geri Dönüşüm';
+                            deleteButton.classList.add('btn', 'btn-danger', 'ms-3');
+                            
+                            deleteButton.addEventListener('click', function() {
+                                fetch(`/update_part/${part.Id}/`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        isDeleted: true 
+                                    })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        li.remove(); 
+                                    } else {
+                                        alert('Parça silinemedi.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    alert('Silme işlemi başarısız oldu.');
+                                });
+                            });
+
+                            li.appendChild(deleteButton);
+                            partsList.appendChild(li);
+                        });
+                    } else {
+                        alert('Parça bulunamadı!');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+</html>
