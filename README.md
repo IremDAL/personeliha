@@ -45,7 +45,8 @@ Parçaları Listele butonuna bastığımız zaman bu sayfa açılıyor.
 <hr>
 
 ![Ekran görüntüsü 2024-12-14 200659](https://github.com/user-attachments/assets/d82b458f-4604-490c-977b-465bc1622ea2)
-#Geri Dönüşüm'e tıkladığımız zaman veri siliniyor ve isDeleted=True oluyor 
+
+Geri Dönüşüm'e tıkladığımız zaman veri siliniyor ve isDeleted=True oluyor 
 <hr>
 
 ![Ekran görüntüsü 2024-12-14 200711](https://github.com/user-attachments/assets/6f27a5fd-02b3-497c-a6c2-491d1e9c528a)
@@ -67,6 +68,7 @@ Parçaları Listele butonuna bastığımız zaman bu sayfa açılıyor.
 <hr><hr><hr>
 
 ![Ekran görüntüsü 2024-12-14 200930](https://github.com/user-attachments/assets/a0f990c1-58f7-4570-9a67-e0c794eabd2e)
+
 Buradan uçak seçimi yapıp Uçak Üret butonuna tıklıyoruz.
 <hr>
 
@@ -74,10 +76,12 @@ Buradan uçak seçimi yapıp Uçak Üret butonuna tıklıyoruz.
 <hr>
 
 ![Ekran görüntüsü 2024-12-14 200946](https://github.com/user-attachments/assets/a6919501-1f99-4aee-a7d9-4959aa8f6721)
+
 Parçaları Göster dediğimiz zaman TB2 ye ait uçak parçaları geliyor.
 <hr>
 
 ![Ekran görüntüsü 2024-12-14 201006](https://github.com/user-attachments/assets/d71ebd32-8980-44bf-85d1-bf439bad49e7)
+
 Seçilen Parçalar dediğimiz zaman seçtiğimiz parçaları görüyoruz.
 <hr><hr><hr>
 
@@ -92,6 +96,7 @@ Burada her bir parçadan kaç adet olduğunu hesaplıyoruz.
 <hr>
 
 ![Ekran görüntüsü 2024-12-14 201120](https://github.com/user-attachments/assets/4d95dcb0-2bf4-4d09-9964-2bbdf2f6511a)
+
 Uçak Üret dediğimiz zaman uçağı üretip bilgilerini sql'e kaydediyor ve parçaları stoktan azaltıyor ve aynı zamanda parçaları bir daha kullanamayacağımız için isDeleted=True yapıyoruz.
 <hr>
 
@@ -109,6 +114,7 @@ Bir daha uçak üretmek istediğimiz zaman parçaları kullandığımız için P
 <hr><hr><hr>
 
 ![Ekran görüntüsü 2024-12-14 211104](https://github.com/user-attachments/assets/8f2987a4-088a-419a-a0bd-0051972721bc)
+
 Uçak bilgilerini tuttuğumuz sql tablomuz :) 
 
 
